@@ -20,37 +20,76 @@ Deployment: Vercel, AWS EC2
 
 Monitoring: Sentry, Google Analytics
 
-📁 Project Structure
-bash
-Copy
-Edit
 /pneumo-detection
 │
-├── /public              → Static assets (logos, images, favicon)
+├── /public                  # Static assets (images, logos, favicon)
+│   └── logo.png
+│   └── favicon.ico
+│
 ├── /src
-│   ├── /app             → Next.js App Router & Pages
-│   │   ├── /auth        → Login & Signup (Role-based)
-│   │   ├── /dashboard   → Admin, Doctor, Patient Dashboards
-│   │   ├── /upload      → X-ray Image Upload
-│   │   ├── /analysis    → ML Result Display
-│   │   └── layout.tsx   → Navbar, Sidebar Layout
-│   │   └── page.tsx     → Landing Page
-│   │
-│   ├── /components      → Reusable UI Components
-│   ├── /lib             → Utilities (auth, prisma, storage, analysis)
-│   ├── /api             → Backend API (auth, upload, analyze)
-│   ├── /hooks           → Custom React Hooks
-│   ├── /styles          → Global Styles (Tailwind)
-│   ├── /config          → Environment & Role Configs
+│   ├── /app                 # Next.js App Router (pages)
+│   │   ├── /auth            # Authentication system
+│   │   │   ├── login        # Unified login page for all roles
+│   │   │   ├── signup       # Signup page for Patients
+│   │   ├── /dashboard       # Role-based dashboards
+│   │   │   ├── /admin       # Admin dashboard
+│   │   │   ├── /doctor      # Doctor dashboard
+│   │   │   ├── /patient     # Patient dashboard
+│   │   ├── /upload          # Image upload page
+│   │   ├── /analysis        # ML analysis & reports
+│   │   └── layout.tsx       # Root layout (navbar, sidebar)
 │
-├── /backend             → ML Model Backend (Python)
-│   └── /ml_model        → Flask API, CNN Model, Image Preprocessing
+├── /components              # Reusable UI components
+│   ├── /ui                  # UI components (buttons, modals)
+│   ├── /auth                # Auth-related components
+│   ├── /dashboard           # Dashboard UI components
+│   ├── /upload              # File upload component
+│   ├── /charts              # Data visualization charts
 │
-├── /prisma              → Prisma Schema & Migrations
-├── /scripts             → Deployment Scripts
-├── .env                 → Environment Variables
-├── next.config.js       → Next.js Config
-└── package.json         → Project Metadata
+├── /lib                     # Utility functions & helper modules
+│   ├── auth.ts              # Authentication config (NextAuth.js)
+│   ├── prisma.ts            # Prisma database connection
+│   ├── storage.ts           # Image storage (AWS S3, GCS)
+│   ├── analysis.ts          # ML model backend call logic
+│
+├── /api                     # Next.js API routes
+│   ├── /auth                # Authentication API routes
+│   ├── /upload              # Image upload API
+│   ├── /analyze             # ML inference API
+│   ├── /results             # Fetch ML results
+│
+├── /styles                  # Global and component-specific styles
+│   ├── globals.css          # Tailwind CSS global styles
+│
+├── /config                  # Configuration files
+│   ├── env.ts               # Environment variables handler
+│   ├── roles.ts             # Role-based routing and permissions
+│
+├── /hooks                   # Custom React hooks
+│   ├── useAuth.ts           # Authentication hook
+│   ├── useUpload.ts         # File upload hook
+│   ├── useAnalysis.ts       # Fetch ML analysis results
+│
+├── /backend                 # ML model backend (Flask/Django)
+│   ├── /ml_model            # Python ML model
+│   │   ├── model.py         # CNN model for pneumonia detection
+│   │   ├── preprocess.py    # Image preprocessing logic
+│   │   ├── api.py           # Flask API for ML inference
+│   │   └── requirements.txt # Python dependencies
+│
+├── /prisma                  # Prisma ORM setup
+│   └── schema.prisma        # Prisma schema definition
+│
+├── /scripts                 # DevOps & Deployment scripts
+│   └── deploy.sh            # Deployment script (AWS, Vercel)
+│
+├── .env                     # Environment variables
+├── .gitignore               # Git ignore rules
+├── next.config.js           # Next.js configuration
+├── package.json             # Project dependencies & scripts
+├── tsconfig.json            # TypeScript configuration
+└── README.md                # Project documentation
+
 ✨ Key Features
 🔍 AI-based Pneumonia Detection using CNN
 
